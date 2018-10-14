@@ -11,7 +11,8 @@ HEAP_SIZE = 0x400
 SOURCES_S = src/startup_stm32f051x8.s
 SOURCES_C = src/main.c src/system_stm32f0xx.c src/can_core.c \
 	    src/can_callbacks.c src/can_api.c src/stm32f0xx_it.c \
-	    src/xprintf.c ./src/can_net.c ./src/jsmn.c
+	    src/xprintf.c ./src/can_net.c ./src/jsmn.c \
+	    stm32f0_peripheral/Src/stm32f0xx_ll_tim.c
 SOURCES = $(SOURCES_S) $(SOURCES_C)
 OBJS = $(SOURCES_S:.s=.o) $(SOURCES_C:.c=.o)
 
@@ -21,6 +22,7 @@ INCLUDES += -I src
 INCLUDES += -I includes
 INCLUDES += -I stm32f0_peripheral/Inc
 INCLUDES += -I stm32f0_peripheral/Src
+INCLUDES += -I src/Libs
 
 DEFINES = -DSTM32 -DSTM32F0 -DSTM32F051x8 -DHEAP_SIZE=$(HEAP_SIZE) -DUSE_FULL_LL_DRIVER
 
@@ -62,7 +64,7 @@ all: tags $(PROJECT).bin $(PROJECT).asm
 
 clean:
 	$(RM) $(OBJS) $(PROJECT).elf $(PROJECT).bin $(PROJECT).asm \
-	$(EXAMPLES:=.bin) $(EXAMPLES:=.elf) ./examples/*.o tags
+	./examples/*.o tags stm32f0_peripheral/Src/*.o
 
 # Hardware specific
 
