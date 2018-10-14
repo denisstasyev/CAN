@@ -207,6 +207,7 @@ SysTick_Handler(void) {
 	if (perc == 101) type=1;
 	if (perc == -1) type=0;
 	tick2++;*/
+	net_poll()
 }
 
 /*
