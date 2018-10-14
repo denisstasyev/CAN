@@ -28,11 +28,6 @@ PendSV_Handler(void) {
 }
 
 void
-SysTick_Handler(void) {
-        net_poll();
-}
-
-void
 EXTI_0_1_Handler(void) {
         if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_0))
         {
